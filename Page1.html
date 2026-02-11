@@ -1,33 +1,152 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
-
 <head>
-
     <meta charset="UTF-8">
-    <title>Liens et images</title>
-    <link rel="stylesheet" href="page1.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutement - Police Nationale</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
+    <header class="main-header">
+        <div class="logo-container">
+            <svg class="logo" viewBox="0 0 100 100" xmlns="">
+                <circle cx="50" cy="50" r="45" fill="#1e3c72" stroke="#fff" stroke-width="2"/>
+                <path d="M50 20 L60 45 L85 45 L65 60 L75 85 L50 70 L25 85 L35 60 L15 45 L40 45 Z" fill="#FFD700"/>
+                <circle cx="50" cy="50" r="15" fill="#fff"/>
+                <text x="50" y="58" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3c72">PN</text>
+            </svg>
+            <h1 class="fade-in">BIENVENUE DANS LA POLICE NATIONALE</h1>
+            <p class="subtitle fade-in">Recrutement et Formation</p>
+        </div>
+    </header>
 
-    <h1>Apprendre les liens et les images</h1>
+    <main class="container">
+        <section class="intro-box slide-up">
+            <h2>Processus de Recrutement - Documents Essentiels</h2>
+            <p>Félicitations pour votre intérêt à rejoindre la Police Nationale ! Avant de poursuivre votre formation en école de police (ENP), veuillez prendre connaissance des documents suivants qui définissent nos valeurs, nos procédures et nos attentes.</p>
+        </section>
 
-    <p>
-        Voici un liens vers <a href="https://www.google.com" target="_blank">Google</a>
-    </p>
+        <section class="features-grid">
+            <div class="card card-blue slide-up" data-delay="0">
+                <div class="icon">🛡️</div>
+                <h3>Notre Mission</h3>
+                <p>Protéger et servir les citoyens avec intégrité, professionnalisme et dévouement sur l'ensemble du territoire.</p>
+            </div>
+            <div class="card card-green slide-up" data-delay="100">
+                <div class="icon">👥</div>
+                <h3>Nos Valeurs</h3>
+                <p>Exemplarité, honneur, courage et loyauté sont les piliers qui guident chacune de nos actions au quotidien.</p>
+            </div>
+            <div class="card card-gold slide-up" data-delay="200">
+                <div class="icon">🎓</div>
+                <h3>Formation</h3>
+                <p>Excellence opérationnelle grâce à une formation rigoureuse en école et un développement continu des compétences.</p>
+            </div>
+        </section>
 
-    <h2>Voici une image :</h2>
-    <img src="https://i.postimg.cc/htLzFkrJ/2179.jpg" alt="Un petit chat trop mignon">
+        <section class="documents-section">
+            <h2 class="section-title slide-up">
+                📄 Documents Obligatoires
+            </h2>
+            <div class="documents-grid">
+                <div class="document-card slide-up" data-delay="0">
+                    <div class="document-header red">
+                        <span class="doc-icon">🔗</span>
+                        <span>Code de la Police Nationale</span>
+                    </div>
+                    <div class="document-body">
+                        <div class="priority-badge">PRIORITÉ HAUTE</div>
+                        <p>Le code fondamental qui définit les lois, procédures légales et protocoles d'arrestation. Document essentiel pour comprendre le cadre juridique de nos interventions.</p>
+                        <ul class="document-list">
+                            <li>Procédures d'arrestation</li>
+                            <li>Code pénal national</li>
+                            <li>Droits Miranda</li>
+                        </ul>
+                        <button class="btn-view" onclick="openDocument('code')">
+                            <span class="btn-icon">🔗</span>
+                            <span>Voir</span>
+                        </button>
+                    </div>
+                </div>
 
-    <h2>Et maintenant une image cliquable :</h2>
-    <a href="https://www.roblox.com" target="_blank">
-        <img src="https://i.postimg.cc/htLzFkrJ/2179.jpg" alt="Logo Roblox" width="200">
+                <div class="document-card slide-up" data-delay="100">
+                    <div class="document-header blue">
+                        <span class="doc-icon">📘</span>
+                        <span>Manuel de la Police Nationale</span>
+                    </div>
+                    <div class="document-body">
+                        <div class="priority-badge">PRIORITÉ HAUTE</div>
+                        <p>Guide complet des opérations quotidiennes, équipements, tactiques et protocoles opérationnels utilisés par tous les membres du département.</p>
+                        <ul class="document-list">
+                            <li>Équipements et véhicules</li>
+                            <li>Tactiques d'intervention</li>
+                            <li>Protocoles radio</li>
+                        </ul>
+                        <button class="btn-view" onclick="openDocument('manuel')">
+                            <span class="btn-icon">🔗</span>
+                            <span>Voir</span>
+                        </button>
+                    </div>
+                </div>
 
-    </a>
+                <div class="document-card slide-up" data-delay="200">
+                    <div class="document-header purple">
+                        <span class="doc-icon">📋</span>
+                        <span>Règlement Interne</span>
+                    </div>
+                    <div class="document-body">
+                        <div class="priority-badge">PRIORITÉ HAUTE</div>
+                        <p>Règles de conduite, hiérarchie, discipline et éthique professionnelle. Définit le comportement attendu de chaque membre de la Police Nationale.</p>
+                        <ul class="document-list">
+                            <li>Code de conduite</li>
+                            <li>Structure hiérarchique</li>
+                            <li>Procédures disciplinaires</li>
+                        </ul>
+                        <button class="btn-view" onclick="openDocument('reglement')">
+                            <span class="btn-icon">🔗</span>
+                            <span>Voir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="steps-section slide-up">
+            <h2 class="section-title">
+                🚀 Prochaines Étapes
+            </h2>
+            <div class="steps-grid">
+                <div class="step-card" data-step="1">
+                    <div class="step-number">1</div>
+                    <h3>Lecture Obligatoire</h3>
+                    <p>Étudiez attentivement les trois documents ci-dessus</p>
+                </div>
+                <div class="step-card" data-step="2">
+                    <div class="step-number yellow">2</div>
+                    <h3>École de Police (ENP)</h3>
+                    <p>Participez à la formation pratique et théorique</p>
+                </div>
+                <div class="step-card" data-step="3">
+                    <div class="step-number green">3</div>
+                    <h3>Intégration</h3>
+                    <p>Rejoignez officiellement nos rangs</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="contact-footer slide-up">
+        <div class="contact-box">
+            <h3>📞 Contact Recrutement</h3>
+            <p>Pour toute question concernant votre processus de recrutement, n'hésitez pas à nous contacter via votre fil de recrutement.</p>
+        </div>
+    </footer>
+
+    <!-- Bouton retour en haut -->
+    <button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
