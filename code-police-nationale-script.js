@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initReadingProgress();
     initArticleTracking();
     
-    console.log('🚔 Code du L.S.P.D initialisé');
-    console.log('%c⚖️ LSPD - Los Santos Police Department', 'color: #5ba3f5; font-size: 20px; font-weight: bold;');
+    console.log('🚔 Code de la Police Nationale initialisé');
+    console.log('%c⚖️ Police Nationale - République Française', 'color: #5ba3f5; font-size: 20px; font-weight: bold;');
     console.log('%c"Protéger et servir"', 'color: #FFD700; font-size: 16px; font-style: italic;');
 });
 
@@ -129,7 +129,7 @@ function initReadingProgress() {
 // Système de suivi des articles lus
 function initArticleTracking() {
     const articles = document.querySelectorAll('.article');
-    const articlesRead = new Set(JSON.parse(localStorage.getItem('lspd_articles_read') || '[]'));
+    const articlesRead = new Set(JSON.parse(localStorage.getItem('pn_articles_read') || '[]'));
     
     // Marquer les articles déjà lus
     articlesRead.forEach(articleId => {
@@ -149,7 +149,7 @@ function initArticleTracking() {
                 setTimeout(() => {
                     if (entry.target.getBoundingClientRect().top < window.innerHeight) {
                         articlesRead.add(articleId);
-                        localStorage.setItem('lspd_articles_read', JSON.stringify([...articlesRead]));
+                        localStorage.setItem('pn_articles_read', JSON.stringify([...articlesRead]));
                         markAsRead(entry.target);
                     }
                 }, 3000);
@@ -186,84 +186,6 @@ function markAsRead(article) {
         `;
         article.style.position = 'relative';
         article.appendChild(indicator);
-    }
-}
-
-// Recherche dans la page
-function initSearch() {
-    const searchInput = document.createElement('input');
-    searchInput.type = 'text';
-    searchInput.placeholder = 'Rechercher dans le code...';
-    searchInput.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 10px 20px;
-        border: 2px solid #5ba3f5;
-        border-radius: 25px;
-        background: rgba(26, 35, 50, 0.9);
-        color: white;
-        font-size: 1rem;
-        outline: none;
-        z-index: 1000;
-        width: 250px;
-    `;
-    
-    searchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase();
-        const articles = document.querySelectorAll('.article');
-        
-        articles.forEach(article => {
-            const text = article.textContent.toLowerCase();
-            if (text.includes(searchTerm) || searchTerm === '') {
-                article.style.display = 'block';
-                
-                // Highlight le terme recherché
-                if (searchTerm !== '') {
-                    highlightText(article, searchTerm);
-                }
-            } else {
-                article.style.display = 'none';
-            }
-        });
-    });
-    
-    document.body.appendChild(searchInput);
-}
-
-function highlightText(element, term) {
-    // Simple highlight - dans une vraie application, utilisez une bibliothèque
-    const content = element.querySelector('.article-content');
-    if (content) {
-        const originalText = content.dataset.originalText || content.textContent;
-        content.dataset.originalText = originalText;
-        
-        if (term) {
-            const regex = new RegExp(`(${term})`, 'gi');
-            content.innerHTML = originalText.replace(regex, '<mark style="background: #FFD700; color: #1a2332; padding: 2px 4px; border-radius: 3px;">$1</mark>');
-        } else {
-            content.textContent = originalText;
-        }
-    }
-}
-
-// Partage d'article
-function shareArticle(articleElement) {
-    const title = articleElement.querySelector('.article-title').textContent;
-    const articleNumber = articleElement.querySelector('.article-number').textContent;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: `Code LSPD - Article ${articleNumber}`,
-            text: title,
-            url: window.location.href
-        }).catch(err => console.log('Erreur de partage:', err));
-    } else {
-        // Fallback: copier le lien
-        const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-            showNotification('Lien copié dans le presse-papier!');
-        });
     }
 }
 
@@ -361,7 +283,7 @@ document.addEventListener('keydown', function(e) {
 // Statistiques de lecture
 function getReadingStats() {
     const totalArticles = document.querySelectorAll('.article').length;
-    const readArticles = JSON.parse(localStorage.getItem('lspd_articles_read') || '[]').length;
+    const readArticles = JSON.parse(localStorage.getItem('pn_articles_read') || '[]').length;
     const percentage = Math.round((readArticles / totalArticles) * 100);
     
     console.log('📊 Statistiques de lecture:');
@@ -381,20 +303,20 @@ function exportToPDF() {
 function toggleDarkMode() {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
-    localStorage.setItem('lspd_theme', isLight ? 'light' : 'dark');
+    localStorage.setItem('pn_theme', isLight ? 'light' : 'dark');
 }
 
 // Charger le thème sauvegardé
-const savedTheme = localStorage.getItem('lspd_theme');
+const savedTheme = localStorage.getItem('pn_theme');
 if (savedTheme === 'light') {
     document.body.classList.add('light-mode');
 }
 
 // Analytics (tracking des sections visitées)
 function trackSectionView(sectionId) {
-    const viewHistory = JSON.parse(localStorage.getItem('lspd_section_views') || '{}');
+    const viewHistory = JSON.parse(localStorage.getItem('pn_section_views') || '{}');
     viewHistory[sectionId] = (viewHistory[sectionId] || 0) + 1;
-    localStorage.setItem('lspd_section_views', JSON.stringify(viewHistory));
+    localStorage.setItem('pn_section_views', JSON.stringify(viewHistory));
     
     console.log(`📍 Section visitée: ${sectionId}`);
 }
@@ -440,8 +362,8 @@ window.addEventListener('load', () => {
 
 // Message de bienvenue
 console.log('%c═══════════════════════════════════════', 'color: #5ba3f5;');
-console.log('%c   CODE DU L.S.P.D - VERSION 2026     ', 'color: #FFD700; font-size: 14px; font-weight: bold;');
-console.log('%c   Los Santos Police Department       ', 'color: #5ba3f5; font-size: 12px;');
+console.log('%c   CODE DE LA POLICE NATIONALE - 2026 ', 'color: #FFD700; font-size: 14px; font-weight: bold;');
+console.log('%c   République Française                ', 'color: #5ba3f5; font-size: 12px;');
 console.log('%c═══════════════════════════════════════', 'color: #5ba3f5;');
 console.log('%c   "Protéger et servir"                ', 'color: #FFD700; font-style: italic;');
 console.log('%c═══════════════════════════════════════', 'color: #5ba3f5;');
@@ -454,13 +376,13 @@ console.log('');
 
 // Fonction utilitaire pour réinitialiser la progression
 window.resetProgress = function() {
-    localStorage.removeItem('lspd_articles_read');
-    localStorage.removeItem('lspd_section_views');
+    localStorage.removeItem('pn_articles_read');
+    localStorage.removeItem('pn_section_views');
     location.reload();
 };
 
 // Exposer certaines fonctions pour usage console
-window.lspd = {
+window.policeNationale = {
     stats: getReadingStats,
     scrollTop: scrollToTop,
     darkMode: toggleDarkMode,
