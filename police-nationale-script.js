@@ -139,7 +139,7 @@ function openDocument(docType) {
     } else if (docType === 'manuel') {
         window.open('manuel-police-nationale.html', '_blank');
     } else if (docType === 'reglement') {
-        showNotification('Le Règlement Interne sera disponible prochainement', 'info');
+         window.open('reglement-police-nationale.html', '_blank');
     }
 }
 
