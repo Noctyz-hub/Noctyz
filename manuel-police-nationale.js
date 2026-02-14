@@ -1,4 +1,4 @@
-cat > /mnt/user-data/outputs/manuel-police-nationale-script.js << 'JSEOF'
+cat > /mnt/user-data/outputs/manuel-police-nationale.js << 'JSEOF'
 // Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
     // Initialisation
