@@ -81,25 +81,28 @@ function initDocumentTracking() {
     const documentsRead = JSON.parse(localStorage.getItem('documentsRead') || '{}');
     
     documentCards.forEach(card => {
-        const docType = card.querySelector('.btn-view').onclick.toString().match(/'([^']+)'/)[1];
-        
-        if (documentsRead[docType]) {
-            const badge = document.createElement('div');
-            badge.className = 'read-badge';
-            badge.innerHTML = '✓ Lu';
-            badge.style.cssText = `
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: #4caf50;
-                color: white;
-                padding: 5px 15px;
-                border-radius: 20px;
-                font-size: 0.8rem;
-                font-weight: bold;
-            `;
-            card.style.position = 'relative';
-            card.appendChild(badge);
+        const btn = card.querySelector('.btn-view');
+        if (btn && btn.onclick) {
+            const docType = btn.onclick.toString().match(/'([^']+)'/)[1];
+            
+            if (documentsRead[docType]) {
+                const badge = document.createElement('div');
+                badge.className = 'read-badge';
+                badge.innerHTML = '✓ Lu';
+                badge.style.cssText = `
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: #4caf50;
+                    color: white;
+                    padding: 5px 15px;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                `;
+                card.style.position = 'relative';
+                card.appendChild(badge);
+            }
         }
     });
 }
@@ -119,7 +122,7 @@ function openDocument(docType) {
     // Animation du bouton
     const allButtons = document.querySelectorAll('.btn-view');
     allButtons.forEach(btn => {
-        if (btn.onclick.toString().includes(docType)) {
+        if (btn.onclick && btn.onclick.toString().includes(docType)) {
             btn.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 btn.style.transform = 'scale(1)';
@@ -130,10 +133,14 @@ function openDocument(docType) {
     // Vérifier si tous les documents ont été lus
     checkAllDocumentsRead();
     
-    // Simuler l'ouverture d'un document (à remplacer par votre logique)
-    setTimeout(() => {
-        alert(`Le document "${getDocumentName(docType)}" serait ouvert ici.\n\nDans une version complète, cela ouvrirait un PDF ou une page dédiée.`);
-    }, 300);
+    // Ouvrir le document correspondant
+    if (docType === 'code') {
+        window.open('code-police-nationale.html', '_blank');
+    } else if (docType === 'manuel') {
+        showNotification('Le Manuel de la Police Nationale sera disponible prochainement', 'info');
+    } else if (docType === 'reglement') {
+        showNotification('Le Règlement Interne sera disponible prochainement', 'info');
+    }
 }
 
 // Obtenir le nom complet du document
@@ -336,45 +343,6 @@ if (savedTheme === 'dark') {
     document.body.classList.add('dark-theme');
 }
 
-// Validation du formulaire (si vous ajoutez un formulaire)
-function validateForm(formData) {
-    const errors = [];
-    
-    if (!formData.name || formData.name.length < 3) {
-        errors.push('Le nom doit contenir au moins 3 caractères');
-    }
-    
-    if (!formData.email || !isValidEmail(formData.email)) {
-        errors.push('Email invalide');
-    }
-    
-    return errors;
-}
-
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-// Analytics (simulation)
-function trackEvent(eventName, eventData = {}) {
-    console.log('📊 Event tracked:', eventName, eventData);
-    
-    // Ici vous pourriez envoyer les données à Google Analytics ou un autre service
-    // gtag('event', eventName, eventData);
-}
-
-// Tracker les clics sur les documents
-document.querySelectorAll('.btn-view').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const docType = this.onclick.toString().match(/'([^']+)'/)[1];
-        trackEvent('document_view', {
-            document_type: docType,
-            timestamp: new Date().toISOString()
-        });
-    });
-});
-
 // Performance monitoring
 window.addEventListener('load', () => {
     const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
@@ -383,12 +351,6 @@ window.addEventListener('load', () => {
     if (loadTime > 3000) {
         console.warn('⚠️ Temps de chargement lent détecté');
     }
-});
-
-// Gestion des erreurs globales
-window.addEventListener('error', (e) => {
-    console.error('❌ Erreur détectée:', e.error);
-    // Ici vous pourriez envoyer l'erreur à un service de monitoring
 });
 
 // Message de bienvenue dans la console
