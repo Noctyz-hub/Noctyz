@@ -137,7 +137,7 @@ function openDocument(docType) {
     if (docType === 'code') {
         window.open('code-police-nationale.html', '_blank');
     } else if (docType === 'manuel') {
-        showNotification('Le Manuel de la Police Nationale sera disponible prochainement', 'info');
+        window.open('manuel-police-nationale.html', '_blank');
     } else if (docType === 'reglement') {
         showNotification('Le Règlement Interne sera disponible prochainement', 'info');
     }
